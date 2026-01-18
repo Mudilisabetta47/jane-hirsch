@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -51,8 +51,8 @@
     --shadow-soft: 0 4px 20px -4px hsl(350 35% 55% / 0.15);
     --shadow-elegant: 0 10px 40px -10px hsl(350 35% 55% / 0.2);
 
-    --font-serif: 'Cormorant Garamond', Georgia, serif;
-    --font-sans: 'Montserrat', system-ui, sans-serif;
+    --font-serif: 'Futura', 'Jost', 'Century Gothic', sans-serif;
+    --font-sans: 'Futura', 'Jost', 'Century Gothic', sans-serif;
   }
 
   .dark {
