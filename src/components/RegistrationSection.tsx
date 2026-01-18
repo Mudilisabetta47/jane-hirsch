@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Check, Sparkles } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const RegistrationSection = () => {
   const { toast } = useToast();
@@ -14,18 +14,15 @@ const RegistrationSection = () => {
     lastName: "",
     email: "",
     phone: "",
-    day1: false,
-    day2: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.day1 && !formData.day2) {
+    if (!formData.firstName || !formData.lastName || !formData.email) {
       toast({
-        title: "Bitte wähle mindestens einen Tag",
-        description: "Du musst mindestens Tag 1 oder Tag 2 auswählen.",
+        title: "Bitte fülle alle Pflichtfelder aus",
         variant: "destructive",
       });
       return;
@@ -33,24 +30,39 @@ const RegistrationSection = () => {
 
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast({
-      title: "Anmeldung erfolgreich! ✨",
-      description: "Wir haben deine Anfrage erhalten und melden uns in Kürze bei dir.",
-    });
-    
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      day1: false,
-      day2: false,
-    });
-    
-    setIsSubmitting(false);
+    try {
+      const { data, error } = await supabase.functions.invoke("send-registration", {
+        body: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+        },
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Anmeldung erfolgreich! ✨",
+        description: "Wir haben deine Anfrage erhalten und melden uns in Kürze bei dir.",
+      });
+      
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+      });
+    } catch (error: any) {
+      console.error("Registration error:", error);
+      toast({
+        title: "Fehler bei der Anmeldung",
+        description: "Bitte versuche es später erneut oder kontaktiere uns direkt.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const features = [
@@ -145,7 +157,7 @@ const RegistrationSection = () => {
               <div className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName" className="text-foreground">Vorname</Label>
+                    <Label htmlFor="firstName" className="text-foreground">Vorname *</Label>
                     <Input
                       id="firstName"
                       value={formData.firstName}
@@ -156,7 +168,7 @@ const RegistrationSection = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lastName" className="text-foreground">Nachname</Label>
+                    <Label htmlFor="lastName" className="text-foreground">Nachname *</Label>
                     <Input
                       id="lastName"
                       value={formData.lastName}
@@ -169,7 +181,7 @@ const RegistrationSection = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-foreground">E-Mail Adresse</Label>
+                  <Label htmlFor="email" className="text-foreground">E-Mail Adresse *</Label>
                   <Input
                     id="email"
                     type="email"
@@ -191,44 +203,6 @@ const RegistrationSection = () => {
                     className="bg-background border-border focus:border-rose focus:ring-rose"
                     placeholder="+49 123 456789"
                   />
-                </div>
-
-                <div className="space-y-4 pt-2">
-                  <Label className="text-foreground font-medium">Wähle deine Tage</Label>
-                  
-                  <div className="flex items-center space-x-3 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors">
-                    <Checkbox
-                      id="day1"
-                      checked={formData.day1}
-                      onCheckedChange={(checked) => setFormData({ ...formData, day1: checked as boolean })}
-                      className="border-rose data-[state=checked]:bg-rose data-[state=checked]:border-rose"
-                    />
-                    <div className="flex-1">
-                      <Label htmlFor="day1" className="cursor-pointer font-medium text-foreground">
-                        Tag 1 - Demo Tag
-                      </Label>
-                      <p className="text-sm text-muted-foreground">
-                        Lerne professionelle Techniken durch Demonstration
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-3 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors">
-                    <Checkbox
-                      id="day2"
-                      checked={formData.day2}
-                      onCheckedChange={(checked) => setFormData({ ...formData, day2: checked as boolean })}
-                      className="border-gold data-[state=checked]:bg-gold data-[state=checked]:border-gold"
-                    />
-                    <div className="flex-1">
-                      <Label htmlFor="day2" className="cursor-pointer font-medium text-foreground">
-                        Tag 2 - Hands-On Tag
-                      </Label>
-                      <p className="text-sm text-muted-foreground">
-                        Eigene Kreation mit professionellen Fotos
-                      </p>
-                    </div>
-                  </div>
                 </div>
 
                 <Button
