@@ -60,8 +60,8 @@ export default {
         champagne: "hsl(var(--champagne))",
       },
       fontFamily: {
-        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-        sans: ['Montserrat', 'system-ui', 'sans-serif'],
+        serif: ['Futura', 'Jost', 'Century Gothic', 'sans-serif'],
+        sans: ['Futura', 'Jost', 'Century Gothic', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
