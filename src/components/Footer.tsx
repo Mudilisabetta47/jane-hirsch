@@ -1,11 +1,9 @@
 import { Heart } from "lucide-react";
-
 const Footer = () => {
-  return (
-    <footer className="py-12 bg-foreground text-primary-foreground">
+  return <footer className="py-12 bg-foreground text-primary-foreground">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center text-center space-y-4">
-          <h3 className="font-serif text-2xl">Masterclass</h3>
+          <h3 className="font-serif text-2xl">Jane Hirsch</h3>
           <p className="text-primary-foreground/70 text-sm max-w-md">
             Professionelles Bridal Hair & Makeup Coaching für aufstrebende Stylisten.
           </p>
@@ -19,8 +17,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
