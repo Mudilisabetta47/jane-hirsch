@@ -32,7 +32,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification to business
     const businessEmailResponse = await resend.emails.send({
       from: "Masterclass Anmeldung <onboarding@resend.dev>",
-      to: ["info@mep-agentur.de"],
+      to: ["info@hochzeitsstyling-jane.de"],
       subject: `Neue Masterclass Anmeldung: ${firstName} ${lastName}`,
       html: `
         <div style="font-family: 'Futura', 'Century Gothic', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
@@ -97,7 +97,7 @@ const handler = async (req: Request): Promise<Response> => {
           <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0 20px;">
           
           <p style="color: #aaa; font-size: 12px; text-align: center;">
-            Diese E-Mail wurde automatisch versendet. Bei Fragen erreichst du uns unter info@mep-agentur.de
+            Diese E-Mail wurde automatisch versendet. Bei Fragen erreichst du uns unter info@hochzeitsstyling-jane.de
           </p>
         </div>
       `,
