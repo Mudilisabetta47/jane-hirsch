@@ -24,11 +24,15 @@ const ScheduleSection = () => {
     icon: Award
   }];
   const day2Schedule = [{
-    time: "10:00 - 10:30 Uhr",
-    title: "Lookbesprechung mit Model & Coach",
+    time: "10:00 - 12:00 Uhr",
+    title: "Schneller Brautlook",
+    icon: Camera
+  }, {
+    time: "12:00 - 12:30 Uhr",
+    title: "Pause",
     icon: Coffee
   }, {
-    time: "10:30 - 15:30 Uhr",
+    time: "12:30 - 15:30 Uhr",
     title: "Eigene Kreation von Hair & Makeup Look am Model",
     description: "Du kannst wählen zwischen Makeup, Hairstyling oder beides. Wunderschöne Brautkleider, Haarschmuck und Accessoires stehen zur Verfügung. Snacks werden bereitgestellt.",
     icon: Camera
