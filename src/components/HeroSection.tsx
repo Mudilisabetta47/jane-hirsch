@@ -50,7 +50,7 @@ const HeroSection = ({
             delay: 0.3,
             duration: 0.8
           }} className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium text-foreground mb-6 leading-tight">
-              <span className="text-gradient-rose">Masterclass</span>
+              <span className="text-gradient-rose">Masterclass</span> ist vorbei
             </motion.h1>
             
             <motion.p initial={{
@@ -63,12 +63,7 @@ const HeroSection = ({
             delay: 0.5,
             duration: 0.8
           }} className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
-              Lerne professionelle Brautfrisuren und Makeup-Techniken von erfahrenen Experten. Erweitere dein Portfolio mit atemberaubenden Braut-Looks.
-
-
-
-
-
+              Wir hoffen, es hat euch gefallen! Vielen Dank für eure Teilnahme.
 
 
             </motion.p>
